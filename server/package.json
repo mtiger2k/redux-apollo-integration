@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-upload-server": "^2.0.4",
+    "archiver": "^2.0.3",
+    "async": "^2.5.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "cp-file": "^4.2.0",
+    "dotenv": "^4.0.0",
+    "ejsexcel": "^3.4.9",
+    "express": "^4.15.4",
+    "gm": "^1.23.0",
+    "graphql": "^0.10.5",
+    "graphql-server-core": "^1.1.0",
+    "graphql-server-express": "^1.1.2",
+    "graphql-server-module-graphiql": "^1.1.2",
+    "graphql-subscriptions": "^0.4.4",
+    "graphql-tools": "^1.2.2",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.9",
+    "morgan": "^1.8.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0",
+    "subscriptions-transport-ws": "^0.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "start": "nodemon src/index.js --exec babel-node -e js",
+    "build": "./node_modules/.bin/babel src --out-dir build",
+    "prod": "node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
