@@ -11,20 +11,23 @@ import {
 import AddChannel from './AddChannel';
 
 const ChannelsList = ({ data: {loading, error, channels }}) => {
-  return (<div>
-         {loading && <p>Loading ...</p>}
-        {error && <p>{error.message}</p>}
-        {!loading && <div className="channelsList">
-          { channels.map( ch =>
-            (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>
-              <Link to={ch.id < 0 ? `/` : `channel/${ch.id}`}>
-                {ch.name}
-              </Link>
-            </div>)
-          )}
-          <AddChannel />
-        </div>}
-        </div>
+  if (loading) {
+    return <p>Loading ...</p>;
+  }
+  if (error) {
+    return <p>{error.message}</p>;
+  }
+  return (
+    <div className="channelsList">
+      { channels.map( ch =>
+        (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>
+          <Link to={ch.id < 0 ? `/` : `channel/${ch.id}`}>
+            {ch.name}
+          </Link>
+        </div>)
+      )}
+      <AddChannel />
+    </div>
   );
 };
 

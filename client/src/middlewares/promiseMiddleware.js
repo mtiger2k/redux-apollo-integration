@@ -24,11 +24,6 @@ function createThunkMiddleware(extraArgument) {
 
             // handle error status, set error message
             if (error.status === 422 || error.status === 400) {
-                const newAction = {
-                    type: 'SET_MESSAGE',
-                    payload: error.data.error || "undefined error"
-                }
-                dispatch(newAction);
             }
 
             if (error.status === 401 || error.status === 500) {

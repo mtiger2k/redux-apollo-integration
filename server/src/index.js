@@ -22,6 +22,7 @@ mongoose.connect(mongoUri, {
   useMongoClient: true
 })
 console.log(mongoUri)
+
 //app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyparser.json())

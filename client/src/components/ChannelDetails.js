@@ -53,17 +53,22 @@ class ChannelDetails extends Component {
   render() {
     const { data: {loading, error, channel }, match } = this.props;
 
-    return (<div>
-        {loading && <ChannelPreview channelId={match.params.channelId}/>}
-        {error && <p>{error.message}</p>}
-        {!loading && channel && <div>
-          <div className="channelName">
-            {channel.name}
-          </div>
-          <MessageList messages={channel.messages}/>
-        </div>}
-        {!loading && channel == null && <NotFound />}
+    if (loading) {
+      return <ChannelPreview channelId={match.params.channelId}/>;
+    }
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+    if(channel === null){
+      return <NotFound />
+    }
+    return (
+      <div>
+        <div className="channelName">
+          {channel.name}
         </div>
+        <MessageList messages={channel.messages}/>
+      </div>
     );
   }
 }
