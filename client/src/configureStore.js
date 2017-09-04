@@ -15,13 +15,22 @@ export default (apolloClient, initialState, history) => {
 	    [applyMiddleware(middleware, promiseMiddleware, reduxThunk, createLogger())] :
 	    [applyMiddleware(middleware, promiseMiddleware, reduxThunk)];
 
+	const appReducer = combineReducers({
+        ...reducers,
+        router: routerReducer,
+        apollo: apolloClient.reducer(),
+        form: formReducer
+    })
+
+    const rootReducer = (state, action) => {
+    	if (action.type == 'USER_LOGOUT') {
+    		state = undefined
+    	}
+    	return appReducer(state, action)
+    }
+
 	const store = createStore(
-	    combineReducers({
-	        ...reducers,
-	        router: routerReducer,
-	        apollo: apolloClient.reducer(),
-	        form: formReducer
-	    }),
+	    rootReducer,
 	    initialState,
 	    compose(
 	    	applyMiddleware(apolloClient.middleware()), ...middlewares,

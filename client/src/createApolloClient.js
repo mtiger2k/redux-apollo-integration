@@ -11,11 +11,11 @@ export default () => {
   const serverPort = `${config.api_host}:${config.api_port}`
   
   const networkInterface = createNetworkInterface({ uri: `http://${serverPort}/graphql` });
-  networkInterface.use([{
+  /*networkInterface.use([{
     applyMiddleware(req, next) {
       setTimeout(next, 500);
     },
-  }]);
+  }]);*/
 
   networkInterface.use([{
     applyMiddleware(req, next) {

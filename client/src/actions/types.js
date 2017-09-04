@@ -6,4 +6,5 @@ export const FETCH_MESSAGE = 'fetch_message'
 // user
 export const FETCH_ME = 'fetch_me'
 export const UPDATE_ME = 'update_me'
+export const CLEAR_USER = 'clear_user'
 export const CLEAR_MSG = 'clear_msg'

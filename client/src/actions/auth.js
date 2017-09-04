@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { UNAUTH_USER, AUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types'
+import { CLEAR_USER, UNAUTH_USER, AUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types'
 import { me } from './user'
 
 export function signinUser({email, password}) {
@@ -20,7 +20,8 @@ export function signinUser({email, password}) {
 
       // If request is bad...
       // -Show an error to the user
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         dispatch(authError('bad login info'))
       })
 
@@ -30,13 +31,19 @@ export function signinUser({email, password}) {
 export function signoutUser() {
   localStorage.removeItem('auth-token')
   return function(dispatch) {
-    dispatch(
+    /*dispatch(
       {type: UNAUTH_USER}
+    )
+    dispatch(
+      {type: CLEAR_USER}
     )
     dispatch({
       type: 'APOLLO_STORE_RESET',
       observableQueryIds: []
-    })
+    })*/
+    dispatch(
+      {type: 'USER_LOGOUT'}
+    )
   }
 }
 

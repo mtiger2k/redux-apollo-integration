@@ -1,4 +1,4 @@
-import { FETCH_ME, UPDATE_ME, CLEAR_MSG } from '../actions/types'
+import { CLEAR_USER, FETCH_ME, UPDATE_ME, CLEAR_MSG } from '../actions/types'
 
 export default function userReducer(state = {user: null, loading: true, successMsg: null}, action) {
   switch (action.type) {
@@ -6,6 +6,8 @@ export default function userReducer(state = {user: null, loading: true, successM
       return Object.assign({}, {user: action.payload, loading: false})
     case UPDATE_ME:
       return Object.assign({}, {user: {...state.user, ...action.payload}, successMsg: '修改成功！'})
+    case CLEAR_USER:
+      return Object.assign({}, {user: null, loading: true})
     case CLEAR_MSG:
       return {...state, successMsg: null}
     default:
