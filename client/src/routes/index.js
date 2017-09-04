@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-//  Switch,
+  Switch,
 } from 'react-router-dom';
 
 import Header from '../components/header'
@@ -15,24 +15,31 @@ import Feature from '../components/feature'
 import ChannelsListWithData from '../components/ChannelsListWithData'
 import ChannelDetails from '../components/ChannelDetails'
 
+import Layout from '../app/components/layout/Layout';
+import Home from '../components/home'
+import FeaturePage from '../components/FeaturePage'
+import ChannelsListPage from '../components/ChannelsListPage'
+import ChannelDetailsPage from '../components/ChannelDetailsPage'
+
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 
 export const routes = () => {
 
   return (
-    <Router>
-        <div>
-          <Header/>
-          <Route path="/" exact={true} component={Welcome}/>
-          <Route path="/signin" component={Signin}/>
-          <Route path="/signout" component={Signout}/>
-          <Route path="/signup" component={Signup}/>
-          <PrivateRoute path="/feature" component={Feature}/>
-          <PrivateRoute path="/channelList" component={ChannelsListWithData}/>
-          <PrivateRoute path="/channel/:channelId" component={ChannelDetails}/>
-        </div>
-    </Router>
+    
+    <Switch>
+      <Route path="/signin" component={Signin}/>
+      <Route path="/signout" component={Signout}/>
+      <Route path="/signup" component={Signup}/>
+      <Layout>
+      <Route path="/" exact={true} component={Home}/>
+      <PrivateRoute path="/feature" component={FeaturePage}/>
+      <PrivateRoute path="/channelList" component={ChannelsListPage}/>
+      <PrivateRoute path="/channel/:channelId" component={ChannelDetailsPage}/>
+      </Layout>
+    </Switch>
+    
   );
 };
 

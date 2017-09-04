@@ -1,2 +1,5 @@
 */node_modules
 */build
+client/public/bootstrap
+client/public/dist
+client/public/plugins

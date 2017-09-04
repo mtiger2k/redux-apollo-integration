@@ -27,7 +27,7 @@ class ChannelDetails extends Component {
     this.props.data.subscribeToMore({
       document: messagesSubscription,
       variables: {
-        channelId: this.props.match.params.channelId,
+        channelId: this.props.channelId,
       },
       updateQuery: (prev, {subscriptionData}) => {
         if (!subscriptionData.data) {
@@ -51,10 +51,10 @@ class ChannelDetails extends Component {
   }
 
   render() {
-    const { data: {loading, error, channel }, match } = this.props;
+    const { data: {loading, error, channel }, channelId } = this.props;
 
     if (loading) {
-      return <ChannelPreview channelId={match.params.channelId}/>;
+      return <ChannelPreview channelId={channelId}/>;
     }
     if (error) {
       return <p>{error.message}</p>;
@@ -88,6 +88,6 @@ export const channelDetailsQuery = gql`
 
 export default (graphql(channelDetailsQuery, {
   options: (props) => ({
-    variables: { channelId: props.match.params.channelId },
+    variables: { channelId: props.channelId },
   }),
 })(ChannelDetails));
