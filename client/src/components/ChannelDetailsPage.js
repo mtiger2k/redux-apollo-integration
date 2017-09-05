@@ -5,7 +5,7 @@ import PageHeader from '../lib/page/PageHeader';
 import Breadcrumb from '../lib/page/Breadcrumb';
 import PageContent from '../lib/page/PageContent';
 
-import ChannelDetails from './ChannelDetails'
+import ChannelDetails from '../components/ChannelDetails'
 
 class ChannelDetailsPage extends Component {
 

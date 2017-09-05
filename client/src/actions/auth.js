@@ -2,12 +2,12 @@ import axios from 'axios'
 import { CLEAR_USER, UNAUTH_USER, AUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types'
 import { me } from './user'
 
-export function signinUser({email, password}) {
+export function signinUser({username, password}) {
 
   return function (dispatch) {
 
-    // submit email and password to server
-    const request = axios.post(`/signin`, {email, password})
+    // submit username and password to server
+    const request = axios.post(`/signin`, {username, password})
     request
       .then(response => {
         // -Save the JWT token
@@ -47,11 +47,10 @@ export function signoutUser() {
   }
 }
 
-export function signupUser({email, password, passwordConfirmation}) {
+export function signupUser({username, password, dispName, mobileNo}) {
   return function (dispatch) {
-    axios.post(`/signup`, {email, password, passwordConfirmation})
+    axios.post(`/signup`, {username, password, dispName, mobileNo})
       .then(response => {
-        console.log(response)
         dispatch({type: AUTH_USER, payload: response.data})
         dispatch(me())
         localStorage.setItem('auth-token', response.data.token)

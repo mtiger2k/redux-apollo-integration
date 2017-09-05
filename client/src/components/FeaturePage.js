@@ -5,7 +5,7 @@ import PageHeader from '../lib/page/PageHeader';
 import Breadcrumb from '../lib/page/Breadcrumb';
 import PageContent from '../lib/page/PageContent';
 
-import Feature from './feature'
+import Feature from '../components/feature'
 
 class FeaturePage extends Component {
 

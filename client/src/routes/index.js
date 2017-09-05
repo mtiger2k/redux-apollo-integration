@@ -4,24 +4,22 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
 
-import Header from '../components/header'
-import Welcome from '../components/welcome'
-import Signin from '../components/auth/signin'
-import Signout from '../components/auth/signout'
-import Signup from '../components/auth/signup'
-import { PrivateRoute } from '../components/auth/require_auth'
-import Feature from '../components/feature'
-import ChannelsListWithData from '../components/ChannelsListWithData'
-import ChannelDetails from '../components/ChannelDetails'
+import Signout from './signout'
+import { PrivateRoute } from './require_auth'
 
 import Layout from '../app/components/layout/Layout';
-import Home from '../components/home'
+
+import LoginPage from '../components/LoginPage'
+import RegisterPage from '../components/RegisterPage'
+import SettingsPage from '../components/SettingsPage'
 import FeaturePage from '../components/FeaturePage'
 import ChannelsListPage from '../components/ChannelsListPage'
 import ChannelDetailsPage from '../components/ChannelDetailsPage'
 
-import createHistory from 'history/createBrowserHistory'
+import HomePage from '../pages/HomePage'
+
 const history = createHistory()
 
 export const routes = () => {
@@ -29,11 +27,12 @@ export const routes = () => {
   return (
     
     <Switch>
-      <Route path="/signin" component={Signin}/>
+      <Route path="/signin" component={LoginPage}/>
       <Route path="/signout" component={Signout}/>
-      <Route path="/signup" component={Signup}/>
+      <Route path="/signup" component={RegisterPage}/>
       <Layout>
-      <Route path="/" exact={true} component={Home}/>
+      <PrivateRoute path="/" exact={true} component={HomePage}/>
+      <PrivateRoute path="/settings" component={SettingsPage}/>
       <PrivateRoute path="/feature" component={FeaturePage}/>
       <PrivateRoute path="/channelList" component={ChannelsListPage}/>
       <PrivateRoute path="/channel/:channelId" component={ChannelDetailsPage}/>

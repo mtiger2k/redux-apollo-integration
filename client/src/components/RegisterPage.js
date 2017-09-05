@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import SignupForm from './signup_form'
-import * as actions from '../../actions/auth'
+
+import * as actions from '../actions/auth'
 import { Redirect } from 'react-router-dom'
 
-class Signup extends Component {
+import RegisterWrapper from './RegisterWrapper'
+import SignupForm from './forms/SignupForm'
+
+class RegisterPage extends Component {
 
   componentWillUnmount() {
     if (this.props.errorMessage) {
@@ -12,8 +15,8 @@ class Signup extends Component {
     }
   }
 
-  handleSubmit({email, password, passwordConfirmation}) {
-    this.props.signupUser({email, password, passwordConfirmation})
+  handleSubmit({username, password, dispName, mobileNo}) {
+    this.props.signupUser({username, password, dispName, mobileNo})
   }
 
   getRedirectPath() {
@@ -33,9 +36,9 @@ class Signup extends Component {
         }
       }}/>
       :
-      <div>
+      <RegisterWrapper>
         <SignupForm onSubmit={this.handleSubmit.bind(this)} errorMessage={this.props.errorMessage}/>
-      </div>
+      </RegisterWrapper>
   }
 }
 
@@ -46,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Signup)
+export default connect(mapStateToProps, actions)(RegisterPage)

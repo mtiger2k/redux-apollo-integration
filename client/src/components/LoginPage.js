@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import SigninForm from './signin_form'
-import * as actions from '../../actions/auth'
+import * as actions from '../actions/auth'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-class Signin extends Component {
+import LoginWrapper from './LoginWrapper'
+import SigninForm from './forms/SigninForm'
+
+class LoginPage extends Component {
 
   componentWillUnmount() {
     if (this.props.errorMessage) {
@@ -17,8 +19,8 @@ class Signin extends Component {
     return location.state && <div className="alert alert-danger">{location.state.message}</div>
   }
 
-  handleSubmit({email, password}) {
-    this.props.signinUser({email, password})
+  handleSubmit({username, password}) {
+    this.props.signinUser({username, password})
   }
 
   getRedirectPath() {
@@ -38,10 +40,10 @@ class Signin extends Component {
         }
       }}/>
       :
-      <div>
-        {this.displayRedirectMessages()}
+      <LoginWrapper>
+        {/*this.displayRedirectMessages()*/}
         <SigninForm onSubmit={this.handleSubmit.bind(this)} errorMessage={this.props.errorMessage}/>
-      </div>
+      </LoginWrapper>
   }
 }
 
@@ -52,4 +54,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Signin)
+export default connect(mapStateToProps, actions)(LoginPage)

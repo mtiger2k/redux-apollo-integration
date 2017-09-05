@@ -22,7 +22,7 @@ const QuickEmail = () => (
       <form action="#" method="post">
         <div className="form-group">
           <input
-            type="email"
+            type="username"
             className="form-control"
             name="emailto"
             placeholder="Email to:"

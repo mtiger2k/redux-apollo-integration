@@ -7,35 +7,39 @@ function tokenForUser(user) {
 }
 
 exports.signin = function (req, res, next) {
-  // User has already had their email and password auth'd
+  // User has already had their username and password auth'd
   // We just need to give them a token
   res.send({token: tokenForUser(req.user)})
 }
 
 exports.signup = function (req, res, next) {
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
-  // See if a user with the given email exists
+  const dispName = req.body.dispName;
+  const mobileNo = req.body.mobileNo;
+  // See if a user with the given username exists
 
 
-  if (!email || !password) {
-    return res.status(422).send({error: 'You must provide email and password'})
+  if (!username || !password) {
+    return res.status(422).send({error: 'You must provide username and password'})
   }
 
-  User.findOne({email: email}, function (err, existingUser) {
+  User.findOne({username: username}, function (err, existingUser) {
     if (err) {
       return next(err);
     }
 
-    // If a user with a given email does exist, return an error
+    // If a user with a given username does exist, return an error
 
     if (existingUser) {
       return res.status(422).send({error: 'Email is in use'});
     }
 
     const user = new User({
-      email: email,
-      password: password
+      username: username,
+      password: password,
+      dispName,
+      mobileNo
     });
 
     user.save(function (err) {
@@ -49,7 +53,7 @@ exports.signup = function (req, res, next) {
   });
 
 
-  // If a user with email does not exist, create and save a user record
+  // If a user with username does not exist, create and save a user record
 
   // Respond to request indicating that the user was created
 }

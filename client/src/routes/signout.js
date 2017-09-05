@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../../actions/auth'
+import * as actions from '../actions/auth'
 import { Redirect } from 'react-router-dom'
 import { withApollo, graphql, gql } from 'react-apollo';
 
